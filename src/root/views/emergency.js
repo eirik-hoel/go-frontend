@@ -357,9 +357,11 @@ class Emergency extends React.Component {
         return selected ? o.id === selected : true;
       })
       .reduce((acc, o) => {
-        acc.beneficiaries += _toNumber(o.num_beneficiaries);
-        acc.funded += _toNumber(o.amount_funded);
-        acc.requested += _toNumber(o.amount_requested);
+        if (o.status === 0) {
+          acc.beneficiaries += _toNumber(o.num_beneficiaries);
+          acc.funded += _toNumber(o.amount_funded);
+          acc.requested += _toNumber(o.amount_requested);
+        }
         return acc;
       }, stats);
     const displayHeadlineStats =
